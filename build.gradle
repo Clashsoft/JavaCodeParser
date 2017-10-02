@@ -34,6 +34,8 @@ class Constants
 
 project.group = 'clashsoft'
 project.version = version
+project.sourceCompatibility = 9
+project.targetCompatibility = 9
 
 // ---------------------------------------- Nightly Versioning ----------------------------------------
 
