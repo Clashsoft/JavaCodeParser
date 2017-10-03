@@ -1,8 +1,9 @@
 package dyvil.reflect;
 
 import dyvil.annotation.internal.NonNull;
-import sun.misc.JavaLangAccess;
-import sun.misc.SharedSecrets;
+
+import jdk.internal.misc.JavaLangAccess;
+import jdk.internal.misc.SharedSecrets;
 
 import java.io.File;
 import java.lang.reflect.Field;
