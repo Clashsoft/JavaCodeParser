@@ -21,6 +21,8 @@ class Constants
 
 	public static final String devStage = 'delta'
 
+	public static final String bootstrapFile = 'libs/dyvil-base.jar'
+
 	public static final String replMainClass = 'dyvilx.tools.repl.Main'
 	public static final String compilerMainClass = 'dyvilx.tools.compiler.Main'
 	public static final String genSrcMainClass = 'dyvilx.tools.gensrc.Main'
@@ -149,7 +151,7 @@ dependencies {
 	def dpfRun = files("$buildDir/dyvil-classes/dpf")
 	def testRun = files("$buildDir/dyvil-classes/test")
 
-	def bootstrap = files('libs/dyvil-bootstrap.jar')
+	def bootstrap = files(bootstrapFile)
 	def libComp = sourceSets.library.output
 
 	libraryRuntime libRun
@@ -274,6 +276,7 @@ idea.module.inheritOutputDirs = true
 
 tasks.withType(JavaCompile) {
 	it.options.compilerArgs.addAll(
+			'--patch-module', 'dyvil.base=' + files(bootstrapFile).asPath,
 			'-parameters',          // generates parameter attributes and names
 			'-XDignore.symbol.file' // disables "proprietary API" warnings
 	)
@@ -332,7 +335,7 @@ private void runGenSrc(JavaExec exec, String target, String... srcs)
 	exec.outputs.dirs target
 
 	exec.main = genSrcMainClass
-	exec.classpath = files("libs/dyvil-bootstrap.jar")
+	exec.classpath = files(bootstrapFile)
 	exec.args = [ "target=$target", '--ansi' ]
 
 	for (String src : srcs)
@@ -455,7 +458,7 @@ task bootstrap(type: Jar, dependsOn: [ 'buildLibrary', 'buildCompiler', 'buildGe
 	from zipTree(buildGenSrc.archivePath)
 
 	destinationDir = file("libs/")
-	archiveName = "dyvil-bootstrap.jar"
+	archiveName = "dyvil-base.jar"
 }
 
 tasks.withType(Jar).forEach {
