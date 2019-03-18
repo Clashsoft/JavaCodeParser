@@ -6,10 +6,11 @@ public final class Tag
 
 	// --------------- General ---------------
 
-	public static final int INT        = 'I';
-	public static final int LONG       = 'J';
-	public static final int FLOAT      = 'F';
-	public static final int DOUBLE     = 'D';
+	public static final int INT    = 'I';
+	public static final int LONG   = 'J';
+	public static final int FLOAT  = 'F';
+	public static final int DOUBLE = 'D';
+	public static final int NAME   = 'N';
 
 	private Tag()
 	{
